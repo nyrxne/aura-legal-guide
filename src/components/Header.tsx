@@ -68,7 +68,7 @@ export function Header() {
           </button>
           <a
             href="#chat"
-            className="inline-flex items-center rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition"
+            className="aura-cta inline-flex items-center rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-medium"
           >
             Chat now
           </a>
