@@ -74,7 +74,7 @@ function FAQs() {
       <section className="container-aura pb-24">
         <div className="max-w-3xl border-y border-hairline divide-y divide-hairline">
           {faqs.map((f, i) => (
-            <details key={f.q} className="group py-7">
+            <details key={f.q} className="aura-faq group py-7">
               <summary className="flex items-start justify-between cursor-pointer list-none gap-6">
                 <span className="flex items-baseline gap-6">
                   <span className="font-display text-accent text-sm shrink-0 w-8">
@@ -84,7 +84,7 @@ function FAQs() {
                     {f.q}
                   </span>
                 </span>
-                <span className="text-muted-foreground text-xl group-open:rotate-45 transition-transform shrink-0">
+                <span className="aura-faq-icon text-muted-foreground text-xl shrink-0">
                   +
                 </span>
               </summary>
