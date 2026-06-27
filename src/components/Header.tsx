@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import logoAsset from "../assets/aura-logo.png.asset.json";
 
 const nav = [
   { to: "/", label: "Home" },
