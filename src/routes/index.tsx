@@ -148,7 +148,7 @@ function Home() {
             <Reveal key={s.n} delay={i * 120}>
               <Link
                 to="/how-it-works"
-                className="block rounded-2xl bg-surface border border-hairline p-8 h-full hover:border-accent transition"
+                className="aura-card-hover block rounded-2xl bg-surface border border-hairline p-8 h-full"
               >
                 <div className="font-display text-3xl text-accent">{s.n}</div>
                 <h3 className="mt-6 font-display text-2xl">{s.title}</h3>
