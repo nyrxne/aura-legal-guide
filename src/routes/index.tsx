@@ -241,7 +241,7 @@ function Home() {
 
         <div className="mt-14 max-w-3xl divide-y divide-hairline border-y border-hairline">
           {faqs.map((f, i) => (
-            <details key={f.q} className="group py-6">
+            <details key={f.q} className="aura-faq group py-6">
               <summary className="flex items-center justify-between cursor-pointer list-none gap-6">
                 <span className="flex items-center gap-6">
                   <span className="font-display text-accent text-sm">
@@ -249,7 +249,7 @@ function Home() {
                   </span>
                   <span className="font-display text-xl">{f.q}</span>
                 </span>
-                <span className="text-muted-foreground group-open:rotate-45 transition-transform">+</span>
+                <span className="aura-faq-icon text-muted-foreground">+</span>
               </summary>
               <p className="mt-4 ml-12 text-muted-foreground text-sm leading-relaxed max-w-xl">
                 {f.a}
