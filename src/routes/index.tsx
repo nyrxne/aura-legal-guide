@@ -185,7 +185,7 @@ function Home() {
         <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {useCases.map((u, i) => (
             <Reveal key={u.title} delay={i * 80}>
-              <div className="rounded-2xl bg-surface border border-hairline p-8 h-full flex flex-col">
+              <div className="aura-card-hover rounded-2xl bg-surface border border-hairline p-8 h-full flex flex-col">
                 <div className="eyebrow-accent">{u.tag}</div>
                 <h3 className="mt-5 font-display text-2xl">{u.title}</h3>
                 <p className="mt-3 text-muted-foreground text-sm flex-1">{u.body}</p>
