@@ -88,7 +88,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "AURA is an empathetic AI legal-literacy assistant that explains your rights in plain language and helps you take safe next steps.",
       },
       { name: "author", content: "AURA" },
-      { property: "og:title", content: "AURA — Plain-language legal guidance" },
+      { property: "og:title", content: "AURA — Know your rights. Take the next step." },
       {
         property: "og:description",
         content:
@@ -96,6 +96,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "AURA — Know your rights. Take the next step." },
+      { name: "description", content: "AURA is an AI legal-literacy assistant that empowers everyday people to understand their rights and take safe next steps." },
+      { property: "og:description", content: "AURA is an AI legal-literacy assistant that empowers everyday people to understand their rights and take safe next steps." },
+      { name: "twitter:description", content: "AURA is an AI legal-literacy assistant that empowers everyday people to understand their rights and take safe next steps." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1e41d395-d139-4fad-a3e7-88e5da8f9013/id-preview-b5b2f920--4e6f464f-825b-4414-83b5-a637e595b3e3.lovable.app-1782565841230.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1e41d395-d139-4fad-a3e7-88e5da8f9013/id-preview-b5b2f920--4e6f464f-825b-4414-83b5-a637e595b3e3.lovable.app-1782565841230.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
