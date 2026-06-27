@@ -50,7 +50,7 @@ export function Header() {
             <Link
               key={n.to}
               to={n.to}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="aura-nav-link text-sm text-muted-foreground hover:text-foreground transition-colors"
               activeProps={{ className: "text-foreground" }}
               activeOptions={{ exact: n.to === "/" }}
             >
