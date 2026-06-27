@@ -29,11 +29,18 @@ export function Header() {
       }`}
     >
       <div className="container-aura flex items-center justify-between h-16">
-        <Link to="/" className="flex items-center gap-2 group">
-          <span className="font-display text-xl tracking-tight text-foreground">
+        <Link to="/" className="flex items-center gap-2.5 group" aria-label="AURA home">
+          <img
+            src={logoAsset.url}
+            alt=""
+            aria-hidden="true"
+            className="h-7 w-auto sm:h-8 select-none"
+            draggable={false}
+          />
+          <span className="font-display text-xl tracking-tight text-foreground leading-none">
             AURA
           </span>
-          <span className="text-[10px] text-dim tracking-[0.2em] uppercase mt-1">
+          <span className="text-[10px] text-dim tracking-[0.2em] uppercase leading-none mt-1">
             ®
           </span>
         </Link>
