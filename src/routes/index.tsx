@@ -279,7 +279,7 @@ function Home() {
             </h2>
             <a
               href="#chat"
-              className="mt-12 inline-flex items-center rounded-full bg-accent text-accent-foreground px-8 py-4 text-sm font-medium hover:opacity-90 transition"
+              className="aura-cta mt-12 inline-flex items-center rounded-full bg-accent text-accent-foreground px-8 py-4 text-sm font-medium"
             >
               Chat now
             </a>
