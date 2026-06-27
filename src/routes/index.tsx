@@ -63,17 +63,7 @@ function Home() {
       {/* HERO */}
       <section className="relative overflow-hidden">
         {/* AURA_HERO_VIDEO_EMBED_START */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover opacity-60"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster=""
-          aria-hidden="true"
-        >
-          {/* <source src="/hero-loop.mp4" type="video/mp4" /> */}
-        </video>
+        <HeroVideo />
         {/* AURA_HERO_VIDEO_EMBED_END */}
 
         {/* fallback / gradient overlay */}
