@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Eyebrow } from "../components/Eyebrow";
 import { ChatEmbed } from "../components/ChatEmbed";
 import { Reveal } from "../components/Reveal";
+import { HeroVideo } from "../components/HeroVideo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
