@@ -43,7 +43,7 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
         />
         <button
           type="submit"
-          className="rounded-full bg-accent text-accent-foreground px-4 py-1.5 text-sm font-medium"
+          className="aura-cta rounded-full bg-accent text-accent-foreground px-4 py-1.5 text-sm font-medium"
         >
           Ask
         </button>
