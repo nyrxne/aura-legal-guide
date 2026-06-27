@@ -124,6 +124,70 @@
   transform: translateY(0);
 }
 
+/* --- AURA interactive polish (additive) --- */
+
+/* Nav underline grow from center */
+.aura-nav-link {
+  position: relative;
+}
+.aura-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  height: 1px;
+  width: 0;
+  background: var(--accent);
+  transition: width 150ms ease-out, left 150ms ease-out;
+}
+.aura-nav-link:hover::after,
+.aura-nav-link[data-active="true"]::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Use-case / linked card lift */
+.aura-card-hover {
+  transition: transform 200ms ease-out, border-color 200ms ease-out, background-color 200ms ease-out;
+}
+.aura-card-hover:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--hairline));
+}
+
+/* Primary CTA soft glow */
+.aura-cta {
+  transition: filter 200ms ease-out, box-shadow 200ms ease-out, opacity 200ms ease-out;
+}
+.aura-cta:hover {
+  filter: brightness(1.08);
+  box-shadow: inset 0 0 18px rgba(255, 240, 200, 0.18), 0 0 0 1px rgba(201, 168, 92, 0.35);
+}
+
+/* FAQ accordion smoother + icon rotate */
+details.aura-faq > summary > .aura-faq-icon {
+  display: inline-block;
+  transition: transform 200ms ease-out;
+}
+details.aura-faq[open] > summary > .aura-faq-icon {
+  transform: rotate(45deg);
+}
+
+/* Online status breathing pulse */
+@keyframes aura-breathe {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+.aura-pulse {
+  animation: aura-breathe 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura-card-hover:hover { transform: none; }
+  .aura-nav-link::after { transition: none; }
+  .aura-pulse { animation: none; opacity: 0.9; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
