@@ -42,11 +42,15 @@ export function CursorLayer() {
     const CLICK_SELECTOR =
       'a, button, [role="button"], summary, label, select, [data-cursor="hover"]';
 
+    const inner = el.firstElementChild as HTMLElement | null;
     const apply = () => {
       const scale = (hovering ? 1.65 : 1) * (pressing ? 0.8 : 1);
       const bg = hovering ? "rgba(201, 168, 92, 0.15)" : "transparent";
-      el.style.transform = `translate3d(${curX - 12}px, ${curY - 12}px, 0) scale(${scale})`;
-      el.style.backgroundColor = bg;
+      el.style.transform = `translate3d(${curX - 12}px, ${curY - 12}px, 0)`;
+      if (inner) {
+        inner.style.transform = `scale(${scale})`;
+        inner.style.backgroundColor = bg;
+      }
     };
 
     const tick = () => {
