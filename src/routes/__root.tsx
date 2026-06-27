@@ -144,6 +144,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <Footer />
+      <CursorLayer />
     </QueryClientProvider>
   );
 }
