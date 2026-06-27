@@ -7,7 +7,16 @@ export function Footer() {
       <div className="container-aura py-20">
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-5">
-            <div className="font-display text-2xl">AURA</div>
+            <div className="flex items-center gap-2.5">
+              <img
+                src={logoAsset.url}
+                alt=""
+                aria-hidden="true"
+                className="h-6 w-auto sm:h-7 select-none"
+                draggable={false}
+              />
+              <div className="font-display text-2xl leading-none">AURA</div>
+            </div>
             <p className="mt-4 text-muted-foreground max-w-sm text-sm leading-relaxed">
               A calm, plain-language guide to your legal rights — built with
               legal aid partners, private by design.
