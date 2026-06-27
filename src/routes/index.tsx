@@ -95,7 +95,7 @@ function Home() {
               <div className="mt-10 flex flex-wrap gap-3">
                 <a
                   href="#chat"
-                  className="inline-flex items-center rounded-full bg-accent text-accent-foreground px-6 py-3 text-sm font-medium hover:opacity-90 transition"
+                  className="aura-cta inline-flex items-center rounded-full bg-accent text-accent-foreground px-6 py-3 text-sm font-medium"
                 >
                   Ask AURA
                 </a>
