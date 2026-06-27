@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import logoAsset from "../assets/aura-logo.png.asset.json";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -28,11 +29,18 @@ export function Header() {
       }`}
     >
       <div className="container-aura flex items-center justify-between h-16">
-        <Link to="/" className="flex items-center gap-2 group">
-          <span className="font-display text-xl tracking-tight text-foreground">
+        <Link to="/" className="flex items-center gap-2.5 group" aria-label="AURA home">
+          <img
+            src={logoAsset.url}
+            alt=""
+            aria-hidden="true"
+            className="h-7 w-auto sm:h-8 select-none"
+            draggable={false}
+          />
+          <span className="font-display text-xl tracking-tight text-foreground leading-none">
             AURA
           </span>
-          <span className="text-[10px] text-dim tracking-[0.2em] uppercase mt-1">
+          <span className="text-[10px] text-dim tracking-[0.2em] uppercase leading-none mt-1">
             ®
           </span>
         </Link>
@@ -42,7 +50,7 @@ export function Header() {
             <Link
               key={n.to}
               to={n.to}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="aura-nav-link text-sm text-muted-foreground hover:text-foreground transition-colors"
               activeProps={{ className: "text-foreground" }}
               activeOptions={{ exact: n.to === "/" }}
             >
@@ -60,7 +68,7 @@ export function Header() {
           </button>
           <a
             href="#chat"
-            className="inline-flex items-center rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition"
+            className="aura-cta inline-flex items-center rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-medium"
           >
             Chat now
           </a>

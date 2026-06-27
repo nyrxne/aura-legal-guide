@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Eyebrow } from "../components/Eyebrow";
 import { ChatEmbed } from "../components/ChatEmbed";
 import { Reveal } from "../components/Reveal";
+import { HeroVideo } from "../components/HeroVideo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -62,17 +63,7 @@ function Home() {
       {/* HERO */}
       <section className="relative overflow-hidden">
         {/* AURA_HERO_VIDEO_EMBED_START */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover opacity-60"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster=""
-          aria-hidden="true"
-        >
-          {/* <source src="/hero-loop.mp4" type="video/mp4" /> */}
-        </video>
+        <HeroVideo />
         {/* AURA_HERO_VIDEO_EMBED_END */}
 
         {/* fallback / gradient overlay */}
@@ -104,7 +95,7 @@ function Home() {
               <div className="mt-10 flex flex-wrap gap-3">
                 <a
                   href="#chat"
-                  className="inline-flex items-center rounded-full bg-accent text-accent-foreground px-6 py-3 text-sm font-medium hover:opacity-90 transition"
+                  className="aura-cta inline-flex items-center rounded-full bg-accent text-accent-foreground px-6 py-3 text-sm font-medium"
                 >
                   Ask AURA
                 </a>
@@ -157,7 +148,7 @@ function Home() {
             <Reveal key={s.n} delay={i * 120}>
               <Link
                 to="/how-it-works"
-                className="block rounded-2xl bg-surface border border-hairline p-8 h-full hover:border-accent transition"
+                className="aura-card-hover block rounded-2xl bg-surface border border-hairline p-8 h-full"
               >
                 <div className="font-display text-3xl text-accent">{s.n}</div>
                 <h3 className="mt-6 font-display text-2xl">{s.title}</h3>
@@ -194,7 +185,7 @@ function Home() {
         <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {useCases.map((u, i) => (
             <Reveal key={u.title} delay={i * 80}>
-              <div className="rounded-2xl bg-surface border border-hairline p-8 h-full flex flex-col">
+              <div className="aura-card-hover rounded-2xl bg-surface border border-hairline p-8 h-full flex flex-col">
                 <div className="eyebrow-accent">{u.tag}</div>
                 <h3 className="mt-5 font-display text-2xl">{u.title}</h3>
                 <p className="mt-3 text-muted-foreground text-sm flex-1">{u.body}</p>
@@ -250,7 +241,7 @@ function Home() {
 
         <div className="mt-14 max-w-3xl divide-y divide-hairline border-y border-hairline">
           {faqs.map((f, i) => (
-            <details key={f.q} className="group py-6">
+            <details key={f.q} className="aura-faq group py-6">
               <summary className="flex items-center justify-between cursor-pointer list-none gap-6">
                 <span className="flex items-center gap-6">
                   <span className="font-display text-accent text-sm">
@@ -258,7 +249,7 @@ function Home() {
                   </span>
                   <span className="font-display text-xl">{f.q}</span>
                 </span>
-                <span className="text-muted-foreground group-open:rotate-45 transition-transform">+</span>
+                <span className="aura-faq-icon text-muted-foreground">+</span>
               </summary>
               <p className="mt-4 ml-12 text-muted-foreground text-sm leading-relaxed max-w-xl">
                 {f.a}
@@ -288,7 +279,7 @@ function Home() {
             </h2>
             <a
               href="#chat"
-              className="mt-12 inline-flex items-center rounded-full bg-accent text-accent-foreground px-8 py-4 text-sm font-medium hover:opacity-90 transition"
+              className="aura-cta mt-12 inline-flex items-center rounded-full bg-accent text-accent-foreground px-8 py-4 text-sm font-medium"
             >
               Chat now
             </a>

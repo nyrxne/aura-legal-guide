@@ -89,7 +89,7 @@ function UseCases() {
         <div className="grid md:grid-cols-2 gap-6">
           {cases.map((c, i) => (
             <Reveal key={c.n} delay={i * 60}>
-              <article className="rounded-2xl bg-surface border border-hairline p-8 h-full flex flex-col">
+              <article className="aura-card-hover rounded-2xl bg-surface border border-hairline p-8 h-full flex flex-col">
                 <div className="flex items-center justify-between">
                   <span className="font-display text-3xl text-accent">{c.n}</span>
                   <span className="eyebrow-accent">{c.tag}</span>
@@ -110,7 +110,7 @@ function UseCases() {
 
                 <a
                   href={`/#chat`}
-                  className="mt-6 inline-flex items-center self-start rounded-full bg-accent text-accent-foreground px-5 py-2.5 text-sm font-medium hover:opacity-90 transition"
+                  className="aura-cta mt-6 inline-flex items-center self-start rounded-full bg-accent text-accent-foreground px-5 py-2.5 text-sm font-medium"
                 >
                   Try this with AURA →
                 </a>

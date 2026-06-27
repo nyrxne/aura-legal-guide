@@ -13,6 +13,8 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { CursorLayer } from "../components/CursorLayer";
+import logoAsset from "../assets/aura-logo.png.asset.json";
 
 function NotFoundComponent() {
   return (
@@ -97,6 +99,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/png", href: logoAsset.url },
+      { rel: "apple-touch-icon", href: logoAsset.url },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
         rel: "preconnect",
@@ -140,6 +144,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <Footer />
+      <CursorLayer />
     </QueryClientProvider>
   );
 }

@@ -3,7 +3,7 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
     <div id={id} className="rounded-2xl bg-surface border border-hairline p-5 sm:p-6 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.6)]">
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-accent" />
+          <span className="aura-pulse h-2 w-2 rounded-full bg-accent" />
           <span className="text-xs text-muted-foreground tracking-wide">
             AURA · online
           </span>
@@ -43,7 +43,7 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
         />
         <button
           type="submit"
-          className="rounded-full bg-accent text-accent-foreground px-4 py-1.5 text-sm font-medium"
+          className="aura-cta rounded-full bg-accent text-accent-foreground px-4 py-1.5 text-sm font-medium"
         >
           Ask
         </button>
