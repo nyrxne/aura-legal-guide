@@ -110,7 +110,7 @@ function UseCases() {
 
                 <a
                   href={`/#chat`}
-                  className="mt-6 inline-flex items-center self-start rounded-full bg-accent text-accent-foreground px-5 py-2.5 text-sm font-medium hover:opacity-90 transition"
+                  className="aura-cta mt-6 inline-flex items-center self-start rounded-full bg-accent text-accent-foreground px-5 py-2.5 text-sm font-medium"
                 >
                   Try this with AURA →
                 </a>
