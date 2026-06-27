@@ -135,17 +135,26 @@ export function CursorLayer() {
         top: 0,
         width: 24,
         height: 24,
-        borderRadius: "9999px",
-        border: "1px solid #C9A85C",
-        backgroundColor: "transparent",
         pointerEvents: "none",
         zIndex: 9999,
         opacity: 0,
-        transition:
-          "opacity 200ms ease, background-color 200ms ease, border-color 200ms ease",
-        willChange: "transform, opacity, background-color",
-        mixBlendMode: "normal",
+        transition: "opacity 200ms ease",
+        willChange: "transform, opacity",
       }}
-    />
+    >
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          borderRadius: "9999px",
+          border: "1px solid #C9A85C",
+          backgroundColor: "transparent",
+          transition: reduced
+            ? "none"
+            : "transform 200ms ease-out, background-color 200ms ease-out",
+          willChange: "transform, background-color",
+        }}
+      />
+    </div>
   );
 }
