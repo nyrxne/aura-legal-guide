@@ -9,8 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UseCasesRouteImport } from './routes/use-cases'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as IndexRouteImport } from './routes/index'
 
+const UseCasesRoute = UseCasesRouteImport.update({
+  id: '/use-cases',
+  path: '/use-cases',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqsRoute = FaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +37,61 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/faqs': typeof FaqsRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/use-cases': typeof UseCasesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/faqs': typeof FaqsRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/use-cases': typeof UseCasesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/faqs': typeof FaqsRoute
+  '/how-it-works': typeof HowItWorksRoute
+  '/use-cases': typeof UseCasesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/faqs' | '/how-it-works' | '/use-cases'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/faqs' | '/how-it-works' | '/use-cases'
+  id: '__root__' | '/' | '/faqs' | '/how-it-works' | '/use-cases'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FaqsRoute: typeof FaqsRoute
+  HowItWorksRoute: typeof HowItWorksRoute
+  UseCasesRoute: typeof UseCasesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/use-cases': {
+      id: '/use-cases'
+      path: '/use-cases'
+      fullPath: '/use-cases'
+      preLoaderRoute: typeof UseCasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faqs': {
+      id: '/faqs'
+      path: '/faqs'
+      fullPath: '/faqs'
+      preLoaderRoute: typeof FaqsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +104,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FaqsRoute: FaqsRoute,
+  HowItWorksRoute: HowItWorksRoute,
+  UseCasesRoute: UseCasesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
