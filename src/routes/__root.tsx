@@ -13,6 +13,8 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { CursorLayer } from "../components/CursorLayer";
+import logoAsset from "../assets/aura-logo.png.asset.json";
 
 function NotFoundComponent() {
   return (
