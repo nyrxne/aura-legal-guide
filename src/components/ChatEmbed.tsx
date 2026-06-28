@@ -57,6 +57,7 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
   useEffect(() => {
     const on = () => setOffline(false);
     const off = () => setOffline(true);
+    if (typeof navigator !== "undefined" && !navigator.onLine) setOffline(true);
     window.addEventListener("online", on);
     window.addEventListener("offline", off);
     return () => {
