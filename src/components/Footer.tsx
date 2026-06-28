@@ -18,8 +18,8 @@ export function Footer() {
               <div className="font-display text-2xl leading-none">AURA</div>
             </div>
             <p className="mt-4 text-muted-foreground max-w-sm text-sm leading-relaxed">
-              A calm, plain-language guide to your legal rights — built with
-              legal aid partners, private by design.
+              A calm, plain-language guide to your legal rights — designed
+              with legal literacy best practices, private by design.
             </p>
             <p className="mt-6 text-dim text-xs leading-relaxed max-w-md">
               AURA provides legal information and guidance, not legal advice.

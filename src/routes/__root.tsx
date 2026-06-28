@@ -14,6 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { CursorLayer } from "../components/CursorLayer";
+import { IntroSplash } from "../components/IntroSplash";
+import { FloatingAsk } from "../components/FloatingAsk";
 import logoAsset from "../assets/aura-logo.png.asset.json";
 
 function NotFoundComponent() {
@@ -145,11 +147,13 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <div id="top" />
+      <IntroSplash />
       <Header />
       <main className="pt-16">
         <Outlet />
       </main>
       <Footer />
+      <FloatingAsk />
       <CursorLayer />
     </QueryClientProvider>
   );

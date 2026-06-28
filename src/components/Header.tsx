@@ -60,22 +60,24 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <button
-            className="hidden sm:inline-flex text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wide"
-            aria-label="Language"
+          <span
+            className="hidden sm:inline-flex items-center text-xs text-dim tracking-wide cursor-default select-none"
+            title="More languages coming soon"
+            aria-label="Language: English. More languages coming soon."
           >
-            EN <span className="ml-1 text-dim">▾</span>
-          </button>
+            EN <span className="ml-1.5 text-[9px] uppercase tracking-widest text-dim/80">Soon</span>
+          </span>
           <a
             href="#chat"
-            className="aura-cta inline-flex items-center rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-medium"
+            className="aura-cta inline-flex items-center rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1220]"
           >
             Chat now
           </a>
           <button
-            className="md:hidden text-foreground p-2"
+            className="md:hidden text-foreground p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
             onClick={() => setOpen((o) => !o)}
-            aria-label="Menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
           >
             <div className="w-5 h-px bg-foreground mb-1.5" />
             <div className="w-5 h-px bg-foreground" />
