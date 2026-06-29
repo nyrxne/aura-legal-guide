@@ -9,6 +9,18 @@ const nav = [
   { to: "/faqs", label: "FAQs" },
 ];
 
+function quickExit() {
+  try {
+    // Clear any visible chat state
+    sessionStorage.clear();
+    localStorage.removeItem("aura-chat");
+  } catch {
+    /* ignore */
+  }
+  // Replace history so back button doesn't return here
+  window.location.replace("https://www.google.com");
+}
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -32,8 +44,7 @@ export function Header() {
         <Link to="/" className="flex items-center gap-2.5 group" aria-label="AURA home">
           <img
             src={logoAsset.url}
-            alt=""
-            aria-hidden="true"
+            alt="AURA logo"
             className="h-7 w-auto sm:h-8 select-none"
             draggable={false}
           />
@@ -59,17 +70,30 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <span
-            className="hidden sm:inline-flex items-center text-xs text-dim tracking-wide cursor-default select-none"
-            title="More languages coming soon"
-            aria-label="Language: English. More languages coming soon."
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link
+            to="/emergency"
+            className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-red-500/40 text-red-200 hover:text-red-100 hover:border-red-500/70 px-3 py-1.5 text-xs transition focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
+            aria-label="In immediate danger? Get help now"
+            title="In immediate danger? Get help now"
           >
-            EN <span className="ml-1.5 text-[9px] uppercase tracking-widest text-dim/80">Soon</span>
-          </span>
+            <span aria-hidden="true">●</span>
+            <span>Get help now</span>
+          </Link>
+
+          <button
+            type="button"
+            onClick={quickExit}
+            className="inline-flex items-center rounded-full border border-hairline text-muted-foreground hover:text-foreground hover:border-accent px-3 py-1.5 text-xs transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            aria-label="Quick exit: clear this page and leave to google.com"
+            title="Leave this site instantly"
+          >
+            Quick exit ↗
+          </button>
+
           <a
             href="#chat"
-            className="aura-cta inline-flex items-center rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1220]"
+            className="aura-cta hidden sm:inline-flex items-center rounded-full bg-accent text-accent-foreground px-4 py-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1220]"
           >
             Chat now
           </a>
@@ -98,6 +122,13 @@ export function Header() {
                 {n.label}
               </Link>
             ))}
+            <Link
+              to="/emergency"
+              onClick={() => setOpen(false)}
+              className="text-base text-red-200 hover:text-red-100 py-1"
+            >
+              In immediate danger? Get help now →
+            </Link>
           </div>
         </div>
       )}

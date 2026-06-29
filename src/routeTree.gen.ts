@@ -14,6 +14,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as FaqsRouteImport } from './routes/faqs'
+import { Route as EmergencyRouteImport } from './routes/emergency'
 import { Route as IndexRouteImport } from './routes/index'
 
 const UseCasesRoute = UseCasesRouteImport.update({
@@ -41,6 +42,11 @@ const FaqsRoute = FaqsRouteImport.update({
   path: '/faqs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EmergencyRoute = EmergencyRouteImport.update({
+  id: '/emergency',
+  path: '/emergency',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,6 +55,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/emergency': typeof EmergencyRoute
   '/faqs': typeof FaqsRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/emergency': typeof EmergencyRoute
   '/faqs': typeof FaqsRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/emergency': typeof EmergencyRoute
   '/faqs': typeof FaqsRoute
   '/how-it-works': typeof HowItWorksRoute
   '/privacy': typeof PrivacyRoute
@@ -76,16 +85,25 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/emergency'
     | '/faqs'
     | '/how-it-works'
     | '/privacy'
     | '/terms'
     | '/use-cases'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/faqs' | '/how-it-works' | '/privacy' | '/terms' | '/use-cases'
+  to:
+    | '/'
+    | '/emergency'
+    | '/faqs'
+    | '/how-it-works'
+    | '/privacy'
+    | '/terms'
+    | '/use-cases'
   id:
     | '__root__'
     | '/'
+    | '/emergency'
     | '/faqs'
     | '/how-it-works'
     | '/privacy'
@@ -95,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EmergencyRoute: typeof EmergencyRoute
   FaqsRoute: typeof FaqsRoute
   HowItWorksRoute: typeof HowItWorksRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -139,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/emergency': {
+      id: '/emergency'
+      path: '/emergency'
+      fullPath: '/emergency'
+      preLoaderRoute: typeof EmergencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -151,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EmergencyRoute: EmergencyRoute,
   FaqsRoute: FaqsRoute,
   HowItWorksRoute: HowItWorksRoute,
   PrivacyRoute: PrivacyRoute,
