@@ -34,8 +34,7 @@ export function HeroVideo() {
       {/* poster always painted as background — prevents blank flash */}
       <img
         src={posterUrl}
-        alt=""
-        aria-hidden="true"
+        alt="Soft abstract navy and gold motion artwork — AURA's calm visual signature"
         className="absolute inset-0 w-full h-full object-cover opacity-60"
         width={1600}
         height={900}

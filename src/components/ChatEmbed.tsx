@@ -38,6 +38,8 @@ type Msg =
   | { id: string; role: "error"; text: string; kind: "network" | "server" | "offline" };
 
 const API_URL = "https://fast-api-fb40.onrender.com/chat";
+const REQUEST_TIMEOUT_MS = 90_000; // backend can cold-start; allow up to 90s
+const COLD_START_HINT_MS = 4_000; // after 4s of waiting, show "waking up" hint
 
 const SUGGESTED = "My landlord won't return my deposit — what can I do?";
 
@@ -49,6 +51,9 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
+  const [coldStart, setColdStart] = useState(false);
+  const [lastQuestion, setLastQuestion] = useState<string | null>(null);
+  const [timedOut, setTimedOut] = useState(false);
   const [offline, setOffline] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -79,6 +84,9 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
     setMessages((m) => [...m, userMsg]);
     setInput("");
     setPending(true);
+    setLastQuestion(trimmed);
+    setTimedOut(false);
+    setColdStart(false);
 
     if (typeof navigator !== "undefined" && !navigator.onLine) {
       setMessages((m) => [
@@ -94,11 +102,16 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
       return;
     }
 
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+    const coldStartId = window.setTimeout(() => setColdStart(true), COLD_START_HINT_MS);
+
     try {
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed }),
+        signal: controller.signal,
       });
       if (!res.ok) {
         setMessages((m) => [
@@ -127,17 +140,27 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
             "Legal information, not legal advice. For complex situations, please consult a qualified lawyer.",
         },
       ]);
-    } catch {
-      setMessages((m) => [
-        ...m,
-        {
-          id: uid(),
-          role: "error",
-          kind: "network",
-          text: "Couldn't reach AURA. Please check your connection and try again.",
-        },
-      ]);
+    } catch (err) {
+      const aborted =
+        (err instanceof DOMException && err.name === "AbortError") ||
+        controller.signal.aborted;
+      if (aborted) {
+        setTimedOut(true);
+      } else {
+        setMessages((m) => [
+          ...m,
+          {
+            id: uid(),
+            role: "error",
+            kind: "network",
+            text: "Couldn't reach AURA. Please check your connection and try again.",
+          },
+        ]);
+      }
     } finally {
+      window.clearTimeout(timeoutId);
+      window.clearTimeout(coldStartId);
+      setColdStart(false);
       setPending(false);
       requestAnimationFrame(() => inputRef.current?.focus());
     }
@@ -246,13 +269,55 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
           <div className="flex justify-start">
             <div className="rounded-2xl rounded-bl-md bg-[#0B1220] border border-hairline px-4 py-3 text-sm text-muted-foreground inline-flex items-center gap-2">
               <span className="sr-only">AURA is typing</span>
-              <span className="typing-dot" />
-              <span className="typing-dot" />
-              <span className="typing-dot" />
+              {coldStart ? (
+                <span>
+                  AURA is waking up — this can take up to a minute the first time.
+                </span>
+              ) : (
+                <>
+                  <span className="typing-dot" />
+                  <span className="typing-dot" />
+                  <span className="typing-dot" />
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+        {timedOut && !pending && (
+          <div
+            role="alert"
+            className="flex items-start gap-2 rounded-xl border border-hairline bg-surface-elevated/60 px-4 py-3 text-sm text-foreground/90"
+          >
+            <Info size={16} className="mt-0.5 shrink-0 text-accent" />
+            <div className="flex-1">
+              <div>That took longer than expected. Try asking again?</div>
+              <div className="mt-2 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (lastQuestion) {
+                      setTimedOut(false);
+                      send(lastQuestion);
+                    }
+                  }}
+                  className="text-xs rounded-full bg-accent text-accent-foreground px-3 py-1.5 font-medium"
+                >
+                  Try again
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTimedOut(false)}
+                  className="text-xs underline underline-offset-4 text-muted-foreground hover:text-foreground"
+                >
+                  Dismiss
+                </button>
+              </div>
             </div>
           </div>
         )}
       </div>
+
 
       <form
         onSubmit={(e) => {
@@ -287,8 +352,9 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
       </form>
 
       <p className="mt-3 text-[11px] text-dim leading-relaxed">
-        Legal information, not legal advice. For complex situations, please
-        consult a qualified lawyer.
+        AURA currently covers <span className="text-muted-foreground">Indian law</span>.
+        Expanding to more regions soon. Legal information, not legal advice — for
+        complex situations, please consult a qualified lawyer.
       </p>
     </div>
   );

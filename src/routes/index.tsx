@@ -54,7 +54,7 @@ const faqs = [
   { q: "Is this legal advice?", a: "No. AURA gives legal information and guidance. For complex situations, please consult a qualified lawyer." },
   { q: "Is my conversation private?", a: "Yes. Conversations are minimized by default, and you can delete your history at any time." },
   { q: "What if my situation is urgent or unsafe?", a: "AURA detects high-risk cases and surfaces emergency contacts and confidential escalation options first." },
-  { q: "What languages does AURA support?", a: "AURA is built for multilingual use. More languages are being added with legal aid partners." },
+  { q: "Which laws does AURA cover?", a: "AURA currently covers Indian law. We're working with legal aid and community partners to expand coverage to more regions and languages." },
 ];
 
 function Home() {
@@ -119,8 +119,8 @@ function Home() {
       <section className="border-y border-hairline bg-surface/40">
         <div className="container-aura py-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
           {[
-            "Built with legal aid partners",
-            "Multilingual support",
+            "Designed with legal literacy best practices",
+            "Covers Indian law",
             "Private by design",
             "Cites verified law",
           ].map((t) => (

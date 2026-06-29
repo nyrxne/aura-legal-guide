@@ -10,8 +10,7 @@ export function Footer() {
             <div className="flex items-center gap-2.5">
               <img
                 src={logoAsset.url}
-                alt=""
-                aria-hidden="true"
+                alt="AURA logo"
                 className="h-6 w-auto sm:h-7 select-none"
                 draggable={false}
               />
@@ -21,9 +20,21 @@ export function Footer() {
               A calm, plain-language guide to your legal rights — designed
               with legal literacy best practices, private by design.
             </p>
-            <p className="mt-6 text-dim text-xs leading-relaxed max-w-md">
+            <p className="mt-6 text-muted-foreground/90 text-xs leading-relaxed max-w-md">
+              <span className="text-foreground">Jurisdiction:</span> AURA
+              currently covers Indian law. Expanding to more regions soon.
+            </p>
+            <p className="mt-4 text-dim text-xs leading-relaxed max-w-md">
               AURA provides legal information and guidance, not legal advice.
               For complex situations, please consult a qualified lawyer.
+            </p>
+            <p className="mt-6 text-xs">
+              <Link
+                to="/emergency"
+                className="text-red-200 hover:text-red-100 underline-offset-4 hover:underline"
+              >
+                In immediate danger? Get help now →
+              </Link>
             </p>
           </div>
 
@@ -35,6 +46,7 @@ export function Footer() {
                 { to: "/how-it-works", label: "How It Works" },
                 { to: "/use-cases", label: "Use Cases" },
                 { to: "/faqs", label: "FAQs" },
+                { to: "/emergency", label: "Get help now" },
               ].map((l) => (
                 <li key={l.to}>
                   <Link
@@ -49,7 +61,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-4">
-            <div className="eyebrow mb-4">Contact</div>
+            <div className="eyebrow mb-4">Contact & legal</div>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <a href="mailto:hello@aura.legal" className="hover:text-foreground">
@@ -57,14 +69,30 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground">
+                <a
+                  href="mailto:partners@aura.legal?subject=Partner%20with%20AURA"
+                  className="hover:text-foreground"
+                >
                   Partner with us
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground">
+                <a
+                  href="mailto:press@aura.legal?subject=Press%20enquiry"
+                  className="hover:text-foreground"
+                >
                   Press
                 </a>
+              </li>
+              <li>
+                <Link to="/privacy" className="hover:text-foreground">
+                  Privacy policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="hover:text-foreground">
+                  Terms of use
+                </Link>
               </li>
             </ul>
           </div>
