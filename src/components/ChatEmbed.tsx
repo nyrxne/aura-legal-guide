@@ -38,6 +38,8 @@ type Msg =
   | { id: string; role: "error"; text: string; kind: "network" | "server" | "offline" };
 
 const API_URL = "https://fast-api-fb40.onrender.com/chat";
+const REQUEST_TIMEOUT_MS = 90_000; // backend can cold-start; allow up to 90s
+const COLD_START_HINT_MS = 4_000; // after 4s of waiting, show "waking up" hint
 
 const SUGGESTED = "My landlord won't return my deposit — what can I do?";
 
@@ -49,6 +51,9 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
+  const [coldStart, setColdStart] = useState(false);
+  const [lastQuestion, setLastQuestion] = useState<string | null>(null);
+  const [timedOut, setTimedOut] = useState(false);
   const [offline, setOffline] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
