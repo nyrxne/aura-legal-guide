@@ -84,6 +84,9 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
     setMessages((m) => [...m, userMsg]);
     setInput("");
     setPending(true);
+    setLastQuestion(trimmed);
+    setTimedOut(false);
+    setColdStart(false);
 
     if (typeof navigator !== "undefined" && !navigator.onLine) {
       setMessages((m) => [
@@ -99,11 +102,16 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
       return;
     }
 
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+    const coldStartId = window.setTimeout(() => setColdStart(true), COLD_START_HINT_MS);
+
     try {
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed }),
+        signal: controller.signal,
       });
       if (!res.ok) {
         setMessages((m) => [
@@ -132,17 +140,27 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
             "Legal information, not legal advice. For complex situations, please consult a qualified lawyer.",
         },
       ]);
-    } catch {
-      setMessages((m) => [
-        ...m,
-        {
-          id: uid(),
-          role: "error",
-          kind: "network",
-          text: "Couldn't reach AURA. Please check your connection and try again.",
-        },
-      ]);
+    } catch (err) {
+      const aborted =
+        (err instanceof DOMException && err.name === "AbortError") ||
+        controller.signal.aborted;
+      if (aborted) {
+        setTimedOut(true);
+      } else {
+        setMessages((m) => [
+          ...m,
+          {
+            id: uid(),
+            role: "error",
+            kind: "network",
+            text: "Couldn't reach AURA. Please check your connection and try again.",
+          },
+        ]);
+      }
     } finally {
+      window.clearTimeout(timeoutId);
+      window.clearTimeout(coldStartId);
+      setColdStart(false);
       setPending(false);
       requestAnimationFrame(() => inputRef.current?.focus());
     }
