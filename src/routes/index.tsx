@@ -119,8 +119,8 @@ function Home() {
       <section className="border-y border-hairline bg-surface/40">
         <div className="container-aura py-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
           {[
-            "Built with legal aid partners",
-            "Multilingual support",
+            "Designed with legal literacy best practices",
+            "Covers Indian law",
             "Private by design",
             "Cites verified law",
           ].map((t) => (
