@@ -269,13 +269,55 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
           <div className="flex justify-start">
             <div className="rounded-2xl rounded-bl-md bg-[#0B1220] border border-hairline px-4 py-3 text-sm text-muted-foreground inline-flex items-center gap-2">
               <span className="sr-only">AURA is typing</span>
-              <span className="typing-dot" />
-              <span className="typing-dot" />
-              <span className="typing-dot" />
+              {coldStart ? (
+                <span>
+                  AURA is waking up — this can take up to a minute the first time.
+                </span>
+              ) : (
+                <>
+                  <span className="typing-dot" />
+                  <span className="typing-dot" />
+                  <span className="typing-dot" />
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+        {timedOut && !pending && (
+          <div
+            role="alert"
+            className="flex items-start gap-2 rounded-xl border border-hairline bg-surface-elevated/60 px-4 py-3 text-sm text-foreground/90"
+          >
+            <Info size={16} className="mt-0.5 shrink-0 text-accent" />
+            <div className="flex-1">
+              <div>That took longer than expected. Try asking again?</div>
+              <div className="mt-2 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (lastQuestion) {
+                      setTimedOut(false);
+                      send(lastQuestion);
+                    }
+                  }}
+                  className="text-xs rounded-full bg-accent text-accent-foreground px-3 py-1.5 font-medium"
+                >
+                  Try again
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTimedOut(false)}
+                  className="text-xs underline underline-offset-4 text-muted-foreground hover:text-foreground"
+                >
+                  Dismiss
+                </button>
+              </div>
             </div>
           </div>
         )}
       </div>
+
 
       <form
         onSubmit={(e) => {
