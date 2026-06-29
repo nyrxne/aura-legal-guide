@@ -40,8 +40,8 @@ const faqs = [
     a: "Yes. We collect only what's needed to help you, and you can delete your history at any time. AURA is built to minimize data by default.",
   },
   {
-    q: "What languages does AURA support?",
-    a: "AURA is built for multilingual use. We're adding more languages with our legal aid and community partners. A visible language switcher appears in the header.",
+    q: "Which laws and languages does AURA cover today?",
+    a: "AURA currently covers Indian law and responds in English. Additional regions and languages are being added with our legal aid and community partners — until then, the language switcher in the header is marked 'Soon' so it's clear what is and isn't live.",
   },
   {
     q: "Is AURA free to use?",
