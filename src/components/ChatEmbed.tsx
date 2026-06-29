@@ -352,8 +352,9 @@ export function ChatEmbed({ id = "chat" }: { id?: string }) {
       </form>
 
       <p className="mt-3 text-[11px] text-dim leading-relaxed">
-        Legal information, not legal advice. For complex situations, please
-        consult a qualified lawyer.
+        AURA currently covers <span className="text-muted-foreground">Indian law</span>.
+        Expanding to more regions soon. Legal information, not legal advice — for
+        complex situations, please consult a qualified lawyer.
       </p>
     </div>
   );
